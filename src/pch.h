@@ -1,4 +1,9 @@
-#pragma once
+// Need to use this instead of #pragma once to be able to build on Mac OS X.
+#ifndef RAINDROP_PCH_H
+#define RAINDROP_PCH_H
+
+// It is not possible to disable pch for C file, so I need to do this.
+#ifdef __cplusplus
 
 #if (defined _MSC_VER) && (_MSC_VER < 1800)
 #error "You require Visual Studio 2013 or higher to compile this application."
@@ -31,6 +36,10 @@
 
 #ifdef LINUX
 #include <pa_linux_alsa.h>
+#endif
+
+#ifdef __APPLE__
+#include <mpg123.h>
 #endif
 
 #if _MSC_VER >= 1900
@@ -73,7 +82,7 @@ namespace std
 #include <thread>
 #include <unordered_set>
 #include <vector>
-#include <randint> // C++17 example implementation
+// #include <randint> // C++17 example implementation???
 
 // C stdlib
 #include <cctype>
@@ -306,3 +315,6 @@ int LCM(const std::vector<int> &Set);
 double latof(std::string s);
 
 #include "directory.h"
+
+#endif
+#endif
